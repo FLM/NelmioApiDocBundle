@@ -253,6 +253,15 @@
                         url += api_key_parameter + '=' + $('#api_key').val();
                     }
 
+                    // add parameters to url if POST
+                    if (method === 'POST')
+                    {
+                        for (var key in $.extend({}, params)) {
+                            url += url.indexOf('?') > 0 ? '&' : '?';
+                            url += key + '=' + params[key];
+                        };
+                    }
+
                     // prepare the api enpoint
                     {% if endpoint == '' and app.request is defined and app.request.host -%}
                     var endpoint = '{{ app.request.getBaseUrl() }}';
